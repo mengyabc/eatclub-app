@@ -7,6 +7,7 @@ import { User } from 'lucide-react';
 import { SlidersHorizontal } from 'lucide-react';
 import Search from './search';
 import { usePathname } from 'next/navigation';
+import { Suspense } from 'react';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -27,7 +28,11 @@ export default function Navbar() {
           <SlidersHorizontal size={24} />
         </div>
 
-        {pathname === '/' && <Search id="mobile" className="w-full" />}
+        {pathname === '/' && (
+          <Suspense>
+            <Search id="mobile" className="w-full" />
+          </Suspense>
+        )}
       </div>
 
       <div className={`${CONTAINER_WIDTH} border-b border-zinc-100 hidden lg:block`}>
@@ -42,7 +47,9 @@ export default function Navbar() {
             />
           </Link>
           <div className="flex items-center justify-between gap-6">
-            {pathname === '/' && <Search id="desktop" className="w-sm border" />}
+            <Suspense>
+              {pathname === '/' && <Search id="desktop" className="w-sm border" />}
+            </Suspense>
             <User size="24" />
             <SlidersHorizontal size={24} />
           </div>

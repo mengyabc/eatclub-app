@@ -6,6 +6,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const formatNameFromUrl = (collection: string): string => {
+  return decodeURIComponent(collection).replaceAll('-', ' ');
+};
+
 export const formatNameForUrl = (name: string) => {
   return encodeURIComponent(name.toLocaleLowerCase().replaceAll(' ', '-'));
 };
